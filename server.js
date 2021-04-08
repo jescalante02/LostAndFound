@@ -9,10 +9,10 @@ app.use(cors()) // Use this after the variable declaration
 const mysql = require('mysql');
 // connection configurations
 const mc = mysql.createConnection({
-    host: '127.0.0.1',
-    user: 'jescalante02',
-    password: 'Durango.99',
-    database: 'LostAndFound'
+    host: '45.55.136.114',
+    user: 'megaLost_S2021',
+    password: 'mega!b00m!',
+    database: 'megaLost_S2021'
 });
 
 // connect to database

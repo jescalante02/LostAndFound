@@ -1,13 +1,13 @@
 'use strict';
 var sql = require('./db.js');
 //Task object constructor
-var Item = function (item) {
-    this.item = item.item;
-    this.status = item.status;
+var Task = function (task) {
+    this.task = task.task;
+    this.status = task.status;
     this.created_at = new Date();
 };
-Item.createItem = function (newItem, result) {
-    sql.query("INSERT INTO item set ?", newItem, function (err, res) {
+Task.createTask = function (newTask, result) {
+    sql.query("INSERT INTO tasks set ?", newTask, function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -17,8 +17,8 @@ Item.createItem = function (newItem, result) {
         }
     });
 };
-Item.getItemById = function (ItemId, result) {
-    sql.query("Select id, item, status, created_at from item where id = ? ", taskId, function (err, res) {
+Task.getTaskById = function (taskId, result) {
+    sql.query("Select id, task, status, created_at from tasks where id = ? ", taskId, function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -27,8 +27,8 @@ Item.getItemById = function (ItemId, result) {
         }
     });
 };
-Item.getAllItem = function (result) {
-    sql.query("Select * from items", function (err, res) {
+Task.getAllTask = function (result) {
+    sql.query("Select * from tasks", function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -38,8 +38,8 @@ Item.getAllItem = function (result) {
         }
     });
 };
-Item.updateById = function (id, item, result) {
-    sql.query("UPDATE item SET item = ? WHERE id = ?", [item.item, id], function (err, res) {
+Task.updateById = function (id, task, result) {
+    sql.query("UPDATE tasks SET task = ? WHERE id = ?", [task.task, id], function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -48,8 +48,8 @@ Item.updateById = function (id, item, result) {
         }
     });
 };
-Item.remove = function (id, result) {
-    sql.query("DELETE FROM item WHERE id = ?", [id], function (err, res) {
+Task.remove = function (id, result) {
+    sql.query("DELETE FROM tasks WHERE id = ?", [id], function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -58,4 +58,4 @@ Item.remove = function (id, result) {
         }
     });
 };
-module.exports = Item;
+module.exports = Task;
