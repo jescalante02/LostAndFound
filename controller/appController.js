@@ -1,41 +1,45 @@
 'use strict';
-var Item = require('../model/appModel.js');
-exports.list_all_item = function (req, res) {
-    Item.getAllItem(function (err, item) {
-        console.log('controller')
+var Task = require('../model/appModel.js');
+
+exports.list_all_tasks = function (req, res) {
+    console.log("LIST ALL TASKS");
+    Task.getAllTask(function (err, task) {
+        console.log('controller');
+        res.setHeader('Content-Type', 'application/json');
         if (err) res.send(err);
-        console.log('res', item);
-        res.send(item);
+        //console.log('res', task);
+        res.send(task);
     });
 };
-exports.create_a_item = function (req, res) {
-    var new_item = new Item(req.body);
+exports.create_a_task = function (req, res) {
+    console.log("POST CREATED");
+    var new_task = new Task(req.body);
+    console.log( new_task );
     //handles null error
-    if (!new_item.item || !new_item.status) {
-        res.status(400).send({error: true, message: 'Please provide item'});
+    if (!new_task.task || !new_task.status) {
+        res.status(400).send({error: true, message: 'Please provide task/status'});
     } else {
-        Item.createItem(new_item, function (err, item) {
+        Task.createTask(new_task, function (err, task) {
             if (err) res.send(err);
-            res.json(item);
+            res.json(task);
         });
     }
 };
-exports.read_a_item = function (req, res) {
-    Item.getItemById(req.params.ItemId, function (err, item) {
+exports.read_a_task = function (req, res) {
+    Task.getTaskById(req.params.taskId, function (err, task) {
         if (err) res.send(err);
-        res.json(item);
+        res.json(task);
     });
 };
-exports.update_a_item = function (req, res) {
-    Item.updateById(req.params.ItemId, new Item(req.body), function (err, item) {
+exports.update_a_task = function (req, res) {
+    Task.updateById(req.params.taskId, new Task(req.body), function (err, task) {
         if (err) res.send(err);
-        res.json(item);
+        res.json(task);
     });
 };
-exports.delete_a_item = function (req, res) {
-    Item.remove(req.params.ItemId, function (err, task) {
+exports.delete_a_task = function (req, res) {
+    Task.remove(req.params.taskId, function (err, task) {
         if (err) res.send(err);
-        res.json({message: 'Item successfully deleted'});
+        res.json({message: 'Task successfully deleted'});
     });
 };
-
