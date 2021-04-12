@@ -1,13 +1,17 @@
 'use strict';
 var sql = require('./db.js');
 //Task object constructor
-var Task = function (task) {
-    this.task = task.task;
-    this.status = task.status;
-    this.created_at = new Date();
+var Item = function (item) {
+    this.officerName = item.officerName;
+    this.itemType = item.itemType;
+    this.itemDesc = item.itemDesc;
+    this.itemVal = item.itemVal;
+    this.location = item.location;
+    this.dateFound = item.dateFound;
+    this.timeFound = item.timeFound;
 };
-Task.createTask = function (newTask, result) {
-    sql.query("INSERT INTO tasks set ?", newTask, function (err, res) {
+Item.createItem = function (newItem, result) {
+    sql.query("INSERT INTO LostItem set ?", newItem, function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -17,8 +21,8 @@ Task.createTask = function (newTask, result) {
         }
     });
 };
-Task.getTaskById = function (taskId, result) {
-    sql.query("Select id, task, status, created_at from tasks where id = ? ", taskId, function (err, res) {
+Item.getItemByID = function (itemID, result) {
+    sql.query("Select itemID, officerName, itemType, itemDesc, itemVal, location, dateFound, timeFound from Lost Items where itemID = ? ", itemID, function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -27,29 +31,19 @@ Task.getTaskById = function (taskId, result) {
         }
     });
 };
-Task.getAllTask = function (result) {
-    sql.query("Select * from tasks", function (err, res) {
+Item.getAllItem = function (result) {
+    sql.query("Select * from LostItems", function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(null, err);
         } else {
-            console.log('tasks : ', res);
+            console.log('Lost Items : ', res);
             result(null, res);
         }
     });
 };
-Task.updateById = function (id, task, result) {
-    sql.query("UPDATE tasks SET task = ? WHERE id = ?", [task.task, id], function (err, res) {
-        if (err) {
-            console.log("error: ", err);
-            result(null, err);
-        } else {
-            result(null, res);
-        }
-    });
-};
-Task.remove = function (id, result) {
-    sql.query("DELETE FROM tasks WHERE id = ?", [id], function (err, res) {
+Item.updateByID = function (itemID, LostItem, result) {
+    sql.query("UPDATE LostItems SET LostItem = ? WHERE itemID = ?", [LostItem.item, itemID], function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -58,4 +52,14 @@ Task.remove = function (id, result) {
         }
     });
 };
-module.exports = Task;
+Item.remove = function (itemID, result) {
+    sql.query("DELETE FROM LostItems WHERE itemID = ?", [itemID], function (err, res) {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+        } else {
+            result(null, res);
+        }
+    });
+};
+module.exports = Item;
