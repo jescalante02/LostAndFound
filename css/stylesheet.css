@@ -16,18 +16,18 @@ h1 {
 #navigation {
     float: left;
     min-width: 20%;
-    background-color: lightblue;
+    
     text-align: center;
     padding-top: 5em;
 
 }
 #studentHeader {
     height: 8em;
-    background-color: red;
+    
 }
 
 #dropDown {
     height: 2em;
     text-align: right;
-    background-color: yellowgreen;
+    
 }
