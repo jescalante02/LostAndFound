@@ -95,7 +95,7 @@ $(document).ready(function() {
         success : function( data ){
             let oStr = `<h2> Available Tasks </h2>`;
             oStr += "<table border='1'> ";
-            oStr += `<tr><th>Id</th><th>Task</th><th>Status</th><th>Created</th></tr>`;
+            oStr += `<tr><th>Id</th><th>Officer Name</th><th>Item Type</th><th>Item Info</th><th>Item Value</th></tr>`;
             //alert("success");
             console.log(`data:`);
             console.log( data );
@@ -104,9 +104,10 @@ $(document).ready(function() {
                 let of = data[i].officerName;
                 let it = data[i].itemType;
                 let iDesc = data[i].itemDesc;
-                oStr += `<tr><td>${ti}</td><td>${of}</td><td>${it}</td><td>${iDesc}</td>`;
+                let iv = data[i].itemVal;
+                oStr += `<tr><td>${ti}</td><td>${of}</td><td>${it}</td><td>${iDesc}</td><td>${iv}</td>`;
                 oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
-                oStr += `<td> <button type="button" class="btn btn-primary" onClick="updateIt(${ti}, '${of}', '${it}' )">Update ${ti} </button> </td>`;
+                oStr += `<td> <button type="button" class="btn btn-primary" onClick="updateIt(${ti}, '${of}', '${it}', '${iv}' )">Update ${ti} </button> </td>`;
                 oStr += `</tr>`;
 
             }
