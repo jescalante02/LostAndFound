@@ -84,7 +84,7 @@ $(document).ready(function() {
     let URL = "http://127.0.0.1:3000/items"
 
     //ToDo: This is how to input a table in HTML dynamically
-    //ToDo: Take Notes
+    //ToDo: Take Note
 
     $.ajax({
         url: URL,
@@ -95,7 +95,7 @@ $(document).ready(function() {
         success : function( data ){
             let oStr = `<h2> Available Tasks </h2>`;
             oStr += "<table border='1'> ";
-            oStr += `<tr><th>Id</th><th>Officer Name</th><th>Item Type</th><th>Item Info</th><th>Item Value</th></tr>`;
+            oStr += `<tr><th>Id</th><th>Officer Name</th><th>Item Type</th><th>Item Info</th><th>Item Value</th><th>Location</th><th>Date Found</th><th>Time Found</th><th>Actions</th></tr>`;
             //alert("success");
             console.log(`data:`);
             console.log( data );
@@ -105,9 +105,11 @@ $(document).ready(function() {
                 let it = data[i].itemType;
                 let iDesc = data[i].itemDesc;
                 let iv = data[i].itemVal;
-                oStr += `<tr><td>${ti}</td><td>${of}</td><td>${it}</td><td>${iDesc}</td><td>${iv}</td>`;
-                oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
-                oStr += `<td> <button type="button" class="btn btn-primary" onClick="updateIt(${ti}, '${of}', '${it}', '${iv}' )">Update ${ti} </button> </td>`;
+                let l = data[i].location;
+                let df = data[i].dateFound;
+                let tf = data[i].timeFound;
+                oStr += `<tr><td>${ti}</td><td>${of}</td><td>${it}</td><td>${iDesc}</td><td>${"$"+ iv}</td><td>${l}</td><td>${df}</td><td>${tf}</td>`;
+                oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button>  <button type="button" class="btn btn-primary" onClick="updateIt(${ti}, '${of}', '${it}', '${iv}', '${l}', '${df}', '${tf}' )">Update ${ti} </button></td>`;
                 oStr += `</tr>`;
 
             }
