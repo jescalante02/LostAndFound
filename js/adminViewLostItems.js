@@ -95,7 +95,7 @@ $(document).ready(function() {
         async: true,
         crossDomain : true,
         success : function( data ){
-            let oStr = `<h2> Available Tasks </h2>`;
+            let oStr = `<h2> Lost Items </h2>`;
             oStr += "<table border='1'> ";
             oStr += `<tr><th>Id</th><th>Officer Name</th><th>Item Type</th><th>Item Info</th><th>Item Value</th><th>Location</th><th>Date Found</th><th>Time Found</th><th>Actions</th></tr>`;
             //alert("success");
