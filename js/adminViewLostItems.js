@@ -12,7 +12,7 @@ function sendTheUpdate( id ) {
     let task = $("#task").val();
     let status = $("#status").val();
 
-    let URL = `http://127.0.0.1:3000/items/${id}`;
+    let URL = `http://127.0.0.1:3000/lostAndFound/lostItems/${id}`;
     let d = {
         officerName : `${officerName}`,
         itemType : `${itemType}`,
@@ -49,7 +49,7 @@ function deleteIt( id ) {
     // delete -> verb -> DELETE
     // tasks/id
     // Todo: Need to error check the ID
-    let URL = `http://127.0.0.1:3000/items/${id}`;
+    let URL = `http://127.0.0.1:3000/lostAndFound/lostItems/${id}`;
     alert(`URL:${URL}`)
     let oStr  = "";
     $.ajax( {
@@ -78,10 +78,12 @@ function startIt(){
     alert("CLICK READY TO GO");
 }
 $(document).ready(function() {
+
     //alert("Document Loaded");
     // JS AJAX CODE HERE TO GET ALL THE TASKS
     let id=document.getElementById("taskArea");
-    let URL = "http://127.0.0.1:3000/items"
+    let URL = `http://127.0.0.1:3000/lostAndFound/lostItems`;
+
 
     //ToDo: This is how to input a table in HTML dynamically
     //ToDo: Take Note
@@ -117,6 +119,7 @@ $(document).ready(function() {
             id.innerHTML = oStr;
         },
         error : function( xhr, status, error ) {
+            alert(URL)
             alert("Error");
         }
 
