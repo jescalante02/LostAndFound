@@ -127,4 +127,56 @@ $(document).ready(function (){
         return 0;
     }
 
+    function getAndTestItemType(buffer, item){
+        buffer = document.getElementById("")
+    }
+
+    function getAndTestItemDesc(buffer, item){
+        buffer = document.getElementById("itemDesc").value;
+        if(buffer === ''){
+            alert("Please enter the description of the item that was found.")
+            return 1;
+        }
+        item.itemDesc = buffer;
+        return 0;
+    }
+
+    function getAndTestTimeFound(buffer, item){
+        buffer = document.getElementById("timeFound").value;
+        if(buffer === ''){
+            alert("Please enter the time found of the item that was found.")
+            return 1;
+        }
+        item.timeFound = buffer;
+        return 0;
+    }
+
+    function getAndTestBuilding(buffer, item){
+        buffer = document.getElementById("")
+    }
+
+    function getAndTestBuildingFloor(buffer, item){
+        buffer = document.getElementById("")
+    }
+
+    function getAndTestBuildingDesc(buffer, item){
+        buffer = document.getElementById("buildingDesc")
+        if(buffer === ''){
+            alert("Please enter the building description.")
+            return 1;
+        }
+        item.buildingDesc = buffer;
+        return 0;
+    }
+
+    function getAndTestItemValue(buffer, item){
+        buffer = document.getElementById("itemValue");
+        if(buffer === ''){
+            alert("Please enter the item value.")
+            return 1;
+        }
+        item.itemValue = buffer;
+        return 0;
+    }
+
 })
