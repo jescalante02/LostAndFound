@@ -15,7 +15,7 @@
             crossorigin="anonymous">
 
     </script>
-    <script src="js/adminViewLostItems.js"></script>
+    <script src="js/adminReportLostItems.js"></script>
 </head>
 <body>
     <div id="navigation">
@@ -41,37 +41,37 @@
             <h1>AU Lost And Found</h1>
             <br /><h3>Report Lost Item</h3>
         </div>
-
-        <div id="">
-            <!-- First row of the form -->
-            <form>
-                <label>Officer Found:</label>&nbsp;<input type="text" id="officerFound" name="officerFound" />
+        <div>
+                <!-- First row of the form -->
+                <label>Officer Found:</label>&nbsp;<input type="text" id="officerFound" name="officerFound" required />
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <label>Date Found:</label>&nbsp;<input type="date" id="dateFound" name="dateFound" />
-                <br /><br /><label>Item Type:</label>&nbsp;<input type="radio" id="School Supplies" name="itemType" value="School Supplies"><label for="School Supplies">School Supplies</label>
+                <label>Date Found:</label>&nbsp;<input type="date" id="dateFound" name="dateFound" required />
+                <!-- Second row of the form -->
+                <br /><br /><label>Item Type:</label>&nbsp;<input type="radio" id="School Supplies" name="itemType" value="School Supplies" required ><label for="School Supplies">School Supplies</label>
                 &nbsp;<input type="radio" id="Electronics" name="itemType" value="Electronics"><label for="Electronics">Electronics</label>
                 &nbsp;<input type="radio" id="Clothing" name="itemType" value="Clothing"><label for="Clothing">Clothing</label>
                 &nbsp;<input type="radio" id="Accessories" name="itemType" value="Accessories"><label for="Accessories">Accessories</label>
-                &nbsp;<input type="radio" id="Miscellaneous" name="itemType" value="Miscellaneous"><label for="Miscellaneous">Miscellaneous</label>
-                <!-- Second row of the form -->
-                <br /><br /><label>Item Description:</label>&nbsp;<input type="text" id="itemDesc" name="itemDesc" />
+                &nbsp;<input type="radio" id="Miscellaneous" name="itemType" value="Miscellaneous" ><label for="Miscellaneous">Miscellaneous</label>
+                <!-- Third row of the form -->
+                <br /><br /><label>Item Description:</label>&nbsp;<input type="text" id="itemDesc" name="itemDesc" required />
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <label>Time Found:</label>&nbsp;<input type="time" id="timeFound" name="timeFound" />
-                <!-- Third row of the form -->
-                <br /><br /><label>Building:</label>&nbsp;<input type="radio" id="DunhamSchool" name="Building" value="Dunham School"><label for="DunhamSchool">Dunham School</label>
+                <label>Time Found:</label>&nbsp;<input type="time" id="timeFound" name="timeFound" required />
+                <!-- Fourth row of the form -->
+                <br /><br /><label>Building:</label>&nbsp;<input type="radio" id="DunhamSchool" name="Building" value="Dunham School" required ><label for="DunhamSchool">Dunham School</label>
                 &nbsp;<input type="radio" id="SchoolofArts" name="Building" value="School of Arts"><label for="SchoolofArts">School of Arts</label>
                 &nbsp;<input type="radio" id="SchoolofEducation" name="Building" value="School of Education"><label for="SchoolofEducation">School of Education</label>
                 &nbsp;<input type="radio" id="SchoolofHealthScience" name="Building" value="School of Health Science"><label for="SchoolofHealthScience">School of Health Science</label>
                 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="radio" id="SchoolofNursing" name="Building" value="School of Nursing"><label for="SchoolofNursing">School of Nursing</label>
                 &nbsp;<input type="radio" id="SchoolofSocialWork" name="Building" value="School of Social Work"><label for="SchoolofSocialWork">School of Social Work</label>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Building Floor:</label>&nbsp;<input type="text" id="floor" name="floor" style="width: 25px" />
-                <!-- Fourth row of the form -->
-                <br/><br /><label>Building Description:</label>&nbsp;<input type="text" id="floor" name="floor" style="width: 200px" />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Building Floor:</label>&nbsp;<input required type="text" id="floor" name="floor" style="width: 25px" />
+                <!-- Fifth row of the form -->
+                <br/><br /><label>Building Description:</label>&nbsp;<input type="text" id="buildingDesc" name="buildingDesc" style="width: 200px" required />
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Est Item Value:</label>
-                &nbsp;<input type="text" id="itemValue" name="itemValue" style="width: 80px" />
-            </form>
+                &nbsp;<input type="text" id="itemValue" name="itemValue" style="width: 80px" required />
+                <!-- Sixth row of the form -->
+            <br /><br /><button id="submitBtn">Submit</button>
         </div>
     </div>
 </body>
