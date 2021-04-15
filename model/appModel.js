@@ -11,7 +11,7 @@ var Item = function (item) {
     this.timeFound = item.timeFound;
 };
 Item.createItem = function (newItem, result) {
-    sql.query("INSERT INTO LostItem set ?", newItem, function (err, res) {
+    sql.query("INSERT INTO LostItems set ?", newItem, function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -22,7 +22,7 @@ Item.createItem = function (newItem, result) {
     });
 };
 Item.getItemByID = function (itemID, result) {
-    sql.query("Select itemID, officerName, itemType, itemDesc, itemVal, location, dateFound, timeFound from Lost Items where itemID = ? ", itemID, function (err, res) {
+    sql.query("Select itemID, officerName, itemType, itemDesc, itemVal, location, dateFound, timeFound from LostItems where itemID = ? ", itemID, function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(err, null);
