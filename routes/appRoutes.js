@@ -11,5 +11,15 @@ module.exports = function (app) {
         .put(todoList.update_a_item)
         .delete(todoList.delete_a_item);
 
+    var todoList2 = require('../controller/foundItemsController');
+
+    app.route('/lostAndFound/foundItems')
+        .get(todoList2.list_all_foundItems)
+        .post(todoList2.create_a_foundItem);
+
+    app.route('/lostAndFound/foundItems/:itemID')
+        .get(todoList2.read_a_foundItem)
+        .put(todoList2.update_a_foundItem)
+        .delete(todoList2.delete_a_foundItem);
 
 };
