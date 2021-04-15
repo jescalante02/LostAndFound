@@ -104,7 +104,17 @@ $(document).ready(function (){
         let numOfErrors = 0; //This variable represents the num of errors, and if any, will not proceed to post the item onto the database
         numOfErrors += getAndTestOfficerFound(testBuffer, item)
         numOfErrors += getAndTestDateFound(testBuffer, item)
-        //alert(numOfErrors)
+        numOfErrors += getAndTestItemType(testBuffer, item);
+        numOfErrors += getAndTestItemDesc(testBuffer, item);
+        numOfErrors += getAndTestTimeFound(testBuffer, item)
+        numOfErrors += getAndTestBuilding(testBuffer, item);
+        numOfErrors += getAndTestBuildingFloor(testBuffer, item);
+        numOfErrors += getAndTestBuildingDesc(testBuffer, item);
+        numOfErrors += getAndTestItemValue(testBuffer, item)
+
+        if (numOfErrors == 0){
+            insertLostItem(item)
+        }
     })
 
     function getAndTestOfficerFound(buffer, item){
@@ -128,7 +138,9 @@ $(document).ready(function (){
     }
 
     function getAndTestItemType(buffer, item){
-        buffer = document.getElementById("")
+        buffer = document.querySelector('input[name="itemType"]:checked').value;
+        item.itemType = buffer; //Since a radio button is already checked, there's no need to check for garbage
+        return 0;
     }
 
     function getAndTestItemDesc(buffer, item){
@@ -152,15 +164,23 @@ $(document).ready(function (){
     }
 
     function getAndTestBuilding(buffer, item){
-        buffer = document.getElementById("")
+        buffer = document.querySelector('input[name="Building"]:checked').value;
+        item.building = buffer; //Since a radio button is already checked, there's no need to check for garbage
+        return 0;
     }
 
     function getAndTestBuildingFloor(buffer, item){
-        buffer = document.getElementById("")
+        buffer = document.getElementById("floor").value
+        if(buffer === ''){
+            alert("Please enter the building floor that the item was found.")
+            return 1;
+        }
+        item.buildingFloor = buffer;
+        return 0
     }
 
     function getAndTestBuildingDesc(buffer, item){
-        buffer = document.getElementById("buildingDesc")
+        buffer = document.getElementById("buildingDesc").value
         if(buffer === ''){
             alert("Please enter the building description.")
             return 1;
@@ -170,13 +190,42 @@ $(document).ready(function (){
     }
 
     function getAndTestItemValue(buffer, item){
-        buffer = document.getElementById("itemValue");
+        buffer = document.getElementById("itemValue").value;
         if(buffer === ''){
             alert("Please enter the item value.")
             return 1;
         }
         item.itemValue = buffer;
         return 0;
+    }
+
+    function insertLostItem(item) {
+        let URL = "http://127.0.0.1:3000/lostAndFound/lostItems"
+        let d = {
+            officerName : `${item.officerFound}`,
+            itemType : `${item.itemType}`,
+            itemDesc : `${item.itemDesc}`,
+            itemVal : `${item.itemValue}`,
+            location : `${item.building}`,
+            dateFound : `${item.dateFound}`,
+            timeFound : `${item.timeFound}`
+        };
+        $.ajax({
+            url : URL,
+            contentType : 'application/json',
+            type: 'POST',
+            data : JSON.stringify( d ),
+            success : function( data ) {
+                //let oStr = "<h2> Success </h2>" ;
+                console.log(`Success`)
+                console.log( data );
+            },
+            error : function( xhr, status, error ) {
+                alert( "Error");
+                console.log(`AJAX ERROR`)
+                console.log( error );
+            }
+        })
     }
 
 })
