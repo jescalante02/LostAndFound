@@ -2,15 +2,23 @@
 var sql = require('./db.js');
 //Task object constructor
 var Item2 = function (item2) {
+    this.officerName = item2.officerName;
+    this.itemType = item2.itemType;
+    this.itemDesc = item2.itemDesc;
+    this.itemVal = item2.itemVal;
+    this.location = item2.location;
+    this.dateFound = item2.dateFound;
+    this.timeFound = item2.timeFound;
     this.studentFName = item2.studentFName;
     this.studentLName = item2.studentLName;
     this.AUID = item2.AUID;
     this.studentPhoneNum = item2.studentPhoneNum;
     this.dateRecovered = item2.dateRecovered;
     this.timeRecovered = item2.timeRecovered;
+    this.studentDriversLicense = item2.studentDriversLicense;
 };
 Item2.createItem = function (newItem2, result) {
-    sql.query("INSERT INTO FoundItem set ?", newItem2, function (err, res) {
+    sql.query("INSERT INTO FoundItems set ?", newItem2, function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(err, null);
