@@ -103,7 +103,7 @@ $(document).ready(function() {
                 let AUID = data[i].AUID;
                 let pN = data[i].studentPhoneNum;
                 let dR = data[i].dateRecovered;
-                let tR = data[i].timeRecoveredl
+                let tR = data[i].timeRecovered;
                 oStr += `<tr><td>${ti}</td><td>${fN}</td><td>${lN}</td><td>${AUID}</td><td>${pN}</td><td>${dR}</td><td>${tR}</td>`;
                 oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button>  <button type="button" class="btn btn-primary" onClick="updateIt(${ti}, '${fN}', '${lN}', '${AUID}', '${pN}', '${dR}', '${tR}' )">Update ${ti} </button></td>`;
                 oStr += `</tr>`;

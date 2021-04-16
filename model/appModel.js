@@ -22,7 +22,7 @@ Item.createItem = function (newItem, result) {
     });
 };
 Item.getItemByID = function (itemID, result) {
-    sql.query("Select itemID, officerName, itemType, itemDesc, itemVal, location, dateFound, timeFound from Lost Items where itemID = ? ", itemID, function (err, res) {
+    sql.query("Select itemID, officerName, itemType, itemDesc, itemVal, location, dateFound, timeFound from LostItems where itemID = ? ", itemID, function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -43,7 +43,7 @@ Item.getAllItem = function (result) {
     });
 };
 Item.updateByID = function (itemID, LostItem, result) {
-    sql.query("UPDATE LostItems SET LostItem = ? WHERE itemID = ?", [LostItem.item, itemID], function (err, res) {
+    sql.query("UPDATE LostItems SET LostItems = ? WHERE itemID = ?", [LostItem.item, itemID], function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(null, err);
