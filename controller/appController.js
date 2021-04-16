@@ -16,7 +16,7 @@ exports.create_a_item = function (req, res) {
     var new_item = new Item(req.body);
     console.log( new_item );
     //handles null error
-    if (!new_item.item || !new_item.officerName) {
+    if (!new_item.officerName || !new_item.itemType || !new_item.itemDesc || !new_item.itemVal || !new_item.location || !new_item.dateFound || !new_item.timeFound  ) {
         res.status(400).send({error: true, message: 'Please provide item'});
     } else {
         Item.createItem(new_item, function (err, item) {

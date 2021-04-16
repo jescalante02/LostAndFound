@@ -11,7 +11,7 @@ var Item = function (item) {
     this.timeFound = item.timeFound;
 };
 Item.createItem = function (newItem, result) {
-    sql.query("INSERT INTO LostItem set ?", newItem, function (err, res) {
+    sql.query("INSERT INTO LostItems set ?", newItem, function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(err, null);

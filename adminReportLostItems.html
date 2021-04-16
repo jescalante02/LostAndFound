@@ -200,13 +200,14 @@ $(document).ready(function (){
     }
 
     function insertLostItem(item) {
+        let totalLocation = item.building + ', ' + "Floor: " +item.buildingFloor + ', ' + item.buildingDesc;
         let URL = "http://127.0.0.1:3000/lostAndFound/lostItems"
         let d = {
             officerName : `${item.officerFound}`,
             itemType : `${item.itemType}`,
             itemDesc : `${item.itemDesc}`,
             itemVal : `${item.itemValue}`,
-            location : `${item.building}`,
+            location : `${totalLocation}`,
             dateFound : `${item.dateFound}`,
             timeFound : `${item.timeFound}`
         };
@@ -219,6 +220,8 @@ $(document).ready(function (){
                 //let oStr = "<h2> Success </h2>" ;
                 console.log(`Success`)
                 console.log( data );
+                alert("Item has been reported.")
+                window.location.reload();
             },
             error : function( xhr, status, error ) {
                 alert( "Error");
