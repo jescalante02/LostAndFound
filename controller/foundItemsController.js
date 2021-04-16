@@ -16,10 +16,10 @@ exports.create_a_foundItem = function (req, res) {
     var new_foundItem = new Item2(req.body);
     console.log( new_foundItem );
     //handles null error
-    if (!new_foundItem.item || !new_foundItem.officerName) {
+    if (!new_foundItem.officerName || !new_foundItem.itemType || !new_foundItem.itemDesc || !new_foundItem.itemVal || !new_foundItem.location || !new_foundItem.dateFound || !new_foundItem.timeFound ||!new_foundItem.studentFName || !new_foundItem.studentLName || !new_foundItem.AUID || !new_foundItem.studentPhoneNum || !new_foundItem.dateRecovered || !new_foundItem.timeRecovered) {
         res.status(400).send({error: true, message: 'Please provide found item'});
     } else {
-        Item.createItem(new_foundItem, function (err, item2) {
+        Item2.createItem(new_foundItem, function (err, item2) {
             if (err) res.send(err);
             res.json(item2);
         });
