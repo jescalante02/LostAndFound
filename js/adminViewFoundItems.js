@@ -95,12 +95,21 @@ $(document).ready(function() {
         success : function( data ){
             let oStr = `<h2> Found Items </h2>`;
             oStr += "<table border='1'> ";
-            oStr += `<tr><th>Id</th><th>Student First Name</th><th>Student Last Name</th><th>AUID</th><th>Student Phone Number</th><th>Date Recovered</th><th>Time Recovered</th><th>Actions</th></tr>`;
+            oStr += `<tr><th>Found ID</th><th>Officer Name</th><th>Item Type</th><th>Item Info</th><th>Item Value</th><th>Location</th><th>Date Found</th><th>Time Found</th><th>Student First Name</th><th>Student Last Name</th><th>AUID</th><th>Student Phone Number</th><th>Date Recovered</th><th>Time Recovered</th><th>Actions</th></tr>`;
             //alert("success");
             console.log(`data:`);
             console.log( data );
             for (let i=0; i<data.length; i++){
                 let ti = data[i].itemID;
+                let of = data[i].officerName;
+                let it = data[i].itemType;
+                let iDesc = data[i].itemDesc;
+                let iv = data[i].itemVal;
+                let l = data[i].location;
+                let df = data[i].dateFound;
+                let tf = data[i].timeFound;
+
+
                 let fN = data[i].studentFName;
                 let lN = data[i].studentLName;
                 let AUID = data[i].AUID;
@@ -108,7 +117,7 @@ $(document).ready(function() {
                 let dR = data[i].dateRecovered;
                 let tR = data[i].timeRecovered;
                 console.log(`${tR}`)
-                oStr += `<tr><td>${ti}</td><td>${fN}</td><td>${lN}</td><td>${AUID}</td><td>${pN}</td><td>${dR}</td><td>${tR}</td>`;
+                oStr += `<tr><td>${ti}</td><td>${of}</td><td>${it}</td><td>${iDesc}</td><td>${"$"+ iv}</td><td>${l}</td><td>${df}</td><td>${tf}</td><td>${fN}</td><td>${lN}</td><td>${AUID}</td><td>${pN}</td><td>${dR}</td><td>${tR}</td>`;
                 oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button>  </td>`;
                 oStr += `</tr>`;
 
