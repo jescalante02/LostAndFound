@@ -1,4 +1,4 @@
-$(document).ready(function (){
+$(document).ready(function () {
 
 
     let lostURL = "http://127.0.0.1:3000/lostAndFound/lostItems"
@@ -200,26 +200,26 @@ $(document).ready(function (){
     //Connects to the lostItems database
     $.ajax({
         url: lostURL,
-        headers: {'Access-Control-Allow-Origin':'*'}, // <-------- set this
+        headers: {'Access-Control-Allow-Origin': '*'}, // <-------- set this
         contentType: 'application/json',
         async: true,
-        crossDomain : true,
-        success : function( data ){
-            for (let i=0; i<data.length; i++){
+        crossDomain: true,
+        success: function (data) {
+            for (let i = 0; i < data.length; i++) {
                 dataLostItems = data;
             }
         },
-        error : function( xhr, status, error ) {
+        error: function (xhr, status, error) {
             alert("Error");
         }
 
     })
 
     //Activates when user presses the submit button
-    $('#submitBtn').click(function (){
+    $('#submitBtn').click(function () {
         //Initialize lostItem object
-        let item = new foundItem('','','','','','','','',0,
-            0,0, 0, 0, '', '', 0, '', 1, '')
+        let item = new foundItem('', '', '', '', '', '', '', '', 0,
+            0, 0, 0, 0, '', '', 0, '', 1, '')
         let testBuffer = ''; //This variable will play a part at testing whether the response from the user input is valid
         let numOfErrors = 0; //This variable represents the num of errors, and if any, will not proceed to post the item onto the database
         numOfErrors += getAndTestItemID(testBuffer, item)
@@ -231,13 +231,14 @@ $(document).ready(function (){
         numOfErrors += getAndTestStudentPhoneNum(testBuffer, item)
         numOfErrors += getAndTestStudentDriversLicense(testBuffer, item)
 
-        if (numOfErrors == 0){
+        if (numOfErrors == 0) {
             //Checks to see if the itemID that was input by user exists in the DB, if so, it will proceed to posting it into the DB and record the index of the lostItem
             let lostItemIndex = checkLostItem(item);
-            if(item.isFound == true){
+            if (item.isFound == true) {
                 copyLostItem(item, lostItemIndex);
                 insertFoundItem(item)
                 alert("Item has been reported.")
+                deleteIt(item)
                 window.location.reload();
             }
         }
@@ -245,9 +246,9 @@ $(document).ready(function (){
 
     })
 
-    function getAndTestItemID(buffer, item){
+    function getAndTestItemID(buffer, item) {
         buffer = document.getElementById("itemID").value;
-        if(buffer === ''){
+        if (buffer === '') {
             alert("Please enter the ID of the item.")
             return 1;
         }
@@ -255,9 +256,9 @@ $(document).ready(function (){
         return 0;
     }
 
-    function getAndTestDateRecovered(buffer, item){
+    function getAndTestDateRecovered(buffer, item) {
         buffer = document.getElementById("dateRecovered").value;
-        if(buffer === ''){
+        if (buffer === '') {
             alert("Please enter the date recovered of the item.")
             return 1;
         }
@@ -275,9 +276,9 @@ $(document).ready(function (){
         return 0;
     }
 
-    function getAndTestTimeRecovered(buffer, item){
+    function getAndTestTimeRecovered(buffer, item) {
         buffer = document.getElementById("timeRecovered").value;
-        if(buffer === ''){
+        if (buffer === '') {
             alert("Please enter the time recovered of the item that was found.")
             return 1;
         }
@@ -285,9 +286,9 @@ $(document).ready(function (){
         return 0;
     }
 
-    function getAndTestStudentFName(buffer, item){
+    function getAndTestStudentFName(buffer, item) {
         buffer = document.getElementById("studentFName").value;
-        if(buffer === ''){
+        if (buffer === '') {
             alert("Please enter the student's first name.")
             return 1;
         }
@@ -295,9 +296,9 @@ $(document).ready(function (){
         return 0;
     }
 
-    function getAndTestStudentLName(buffer, item){
+    function getAndTestStudentLName(buffer, item) {
         buffer = document.getElementById("studentLName").value;
-        if(buffer === ''){
+        if (buffer === '') {
             alert("Please enter the student's last name.")
             return 1;
         }
@@ -315,16 +316,16 @@ $(document).ready(function (){
         return 0;
     }
 
-    function getAndTestStudentDriversLicense(buffer, item){
+    function getAndTestStudentDriversLicense(buffer, item) {
         buffer = document.getElementById("studentDriversLicense").value;
         //This is not a required field to input data
         item.studentDriversLicense = buffer;
         return 0;
     }
 
-    function checkLostItem(item){
+    function checkLostItem(item) {
         //alert("Testing.."+dataLostItems.length)
-        for (let i=0; i<dataLostItems.length; i++) {
+        for (let i = 0; i < dataLostItems.length; i++) {
             //console.log(dataLostItems[i])
             if (dataLostItems[i].itemID == item.itemID) {
                 alert("Success")
@@ -332,13 +333,13 @@ $(document).ready(function (){
                 return i
             }
         }
-            alert("That item ID was not found, please try again.")
-            item.isFound = false
-            return 1
+        alert("That item ID was not found, please try again.")
+        item.isFound = false
+        return 1
 
     }
 
-    function copyLostItem(item, j){
+    function copyLostItem(item, j) {
         item.officerFound = dataLostItems[j].officerName;
         item.itemType = dataLostItems[j].itemType;
         item.itemDesc = dataLostItems[j].itemDesc;
@@ -350,39 +351,61 @@ $(document).ready(function (){
 
     function insertFoundItem(item) {
         let d = {
-            officerName : `${item.officerFound}`,
-            itemType : `${item.itemType}`,
-            itemDesc : `${item.itemDesc}`,
-            itemVal : `${item.itemValue}`,
-            location : `${item.location}`,
-            dateFound : `${item.dateFound}`,
-            timeFound : `${item.timeFound}`,
-            studentFName : `${item.studentFName}`,
-            studentLName : `${item.studentLName}`,
-            AUID : `${item.AUID}`,
-            studentPhoneNum : `${item.studentPhoneNum}`,
-            dateRecovered : `${item.dateRecovered}`,
-            timeRecovered : `${item.timeRecovered}`,
-            studentDriversLicense : `${item.studentDriversLicense}`
+            officerName: `${item.officerFound}`,
+            itemType: `${item.itemType}`,
+            itemDesc: `${item.itemDesc}`,
+            itemVal: `${item.itemValue}`,
+            location: `${item.location}`,
+            dateFound: `${item.dateFound}`,
+            timeFound: `${item.timeFound}`,
+            studentFName: `${item.studentFName}`,
+            studentLName: `${item.studentLName}`,
+            AUID: `${item.AUID}`,
+            studentPhoneNum: `${item.studentPhoneNum}`,
+            dateRecovered: `${item.dateRecovered}`,
+            timeRecovered: `${item.timeRecovered}`,
+            studentDriversLicense: `${item.studentDriversLicense}`
         };
         $.ajax({
-            url : foundURL,
-            contentType : 'application/json',
+            url: foundURL,
+            contentType: 'application/json',
             type: 'POST',
-            data : JSON.stringify( d ),
-            success : function( data ) {
+            data: JSON.stringify(d),
+            success: function (data) {
                 //let oStr = "<h2> Success </h2>" ;
                 console.log(`Success`)
-                console.log( data );
+                console.log(data);
                 alert("Item has been reported.")
                 window.location.reload();
             },
-            error : function( xhr, status, error ) {
-                alert( "Error");
+            error: function (xhr, status, error) {
+                alert("Error");
                 console.log(`AJAX ERROR`)
-                console.log( error );
+                console.log(error);
             }
         })
     }
 
+    function deleteIt(item) {
+        // Todo: Need to error check the ID
+        let URL = `http://127.0.0.1:3000/lostAndFound/lostItems/${item.itemID}`;
+        alert(`URL:${URL}`)
+        $.ajax({
+            url: URL,
+            contentType: 'application/json',
+            type: "DELETE",
+            success: function (data) {
+                console.log("SUCCESS");
+                console.log(data);
+                window.location.reload();
+            },
+            error: function (xhr, status, error) {
+                alert("Error");
+                console.log("Error");
+                window.location.reload();
+            }
+        })
+
+    }
 })
+
