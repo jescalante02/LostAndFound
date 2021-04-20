@@ -34,10 +34,15 @@ h1 {
 
 }
 
+
 #filterSortArea {
     height: 2em;
     float: right;
 
+}
+
+#centerContents{
+    align-self: center;
 }
 
 /* START
