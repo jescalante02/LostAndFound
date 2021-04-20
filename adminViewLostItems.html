@@ -1,68 +1,128 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>AU - Lost And Found</title>
-    <link rel="stylesheet" href="css/stylesheet.css" />
-    <!--
-    https://visme.co/blog/website-color-schemes/
-    23 - Blue and Refreshing Color Scheme
-    -->
+function updateIt( id, task, status ) {
+    alert(`Update IT! ${id}`);
+    let str = `<h2> Update of id:${id} </h2>`;
+    str += `<input type='text' name='task' id='task' value='${task}'>`;
+    str += `<input type='text' name='status' id='status' value='${status}'>`;
+    str += `<button type="button" class="btn btn-primary" onClick="sendTheUpdate(${id})">Update ${id} </button> `;
+    $("#results").html( str );
+}
+function sendTheUpdate( id ) {
+    alert(`SendoTheUpdateIT! ${id}`)
+    // ToDo: Error Checking
+    let task = $("#task").val();
+    let status = $("#status").val();
 
-    <script
-            src="https://code.jquery.com/jquery-3.6.0.min.js"
-            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-            crossorigin="anonymous">
+    let URL = `http://127.0.0.1:3000/lostAndFound/lostItems/${id}`;
+    let d = {
+        officerName : `${officerName}`,
+        itemType : `${itemType}`,
+        itemDesc : `${itemDesc}`,
+        itemVal : `${itemVal}`,
+        location : `${location}`,
+        dateFound : `${dateFound}`,
+        timeFound : `${timeFound}`
+    };
+    $.ajax({
+        url : URL,
+        contentType : 'application/json',
+        type: 'PUT',
+        data : JSON.stringify( d ),
+        success : function( data ) {
+            let oStr = "<h2> Success </h2>" ;
+            console.log(`Success`)
+            console.log( data );
+            alert("SUCCESS");
+            window.location.reload();
+        },
+        error : function( xhr, status, error ) {
+            alert( "Error");
+            console.log(`AJAX ERROR`)
+            console.log( error );
+        }
+    })
 
-    </script>
-    <script src="js/adminViewLostItems.js"></script>
-</head>
-<body>
-    <div id="navigation">
-        <h2>What are you<br />looking to do?</h2>
-        <br />
-        <div class="dropdown">
-            <button class="dropbtn">Select One:</button>
-            <div class="dropdown-content">
-                <a href="adminReportLostItems.html">Report Lost</a>
-                <a href="adminReportFoundItems.html">Report Found</a>
-                <a href="adminViewLostItems.html">View Lost</a>
-                <a href="#">View Found</a>
-            </div>
-        </div>
+    // PUT with the ID -> 127.0.0.1:3000/12
+}
+function deleteIt( id ) {
+    alert(`DELETE IT! ${id}`)
+    // This is the spot -> AJAX call to delete id=id
+    // delete -> verb -> DELETE
+    // tasks/id
+    // Todo: Need to error check the ID
+    let URL = `http://127.0.0.1:3000/lostAndFound/lostItems/${id}`;
+    alert(`URL:${URL}`)
+    let oStr  = "";
+    $.ajax( {
+        url : URL,
+        contentType: 'application/json',
+        type: "DELETE",
+        success: function( data ){
+            console.log( "SUCCESS");
+            console.log( data );
+            // Todo: add a cookie with this message
+            oStr = `<span style="color:red"> ${data.message}</span>`
+            $("#ajaxResults").html( oStr );
+            alert("Success");
+            window.location.reload();
+        },
+        error: function( xhr, status, error ) {
+            alert("Error");
+            console.log( "Error");
+            window.location.reload();
+        }
+    })
+
+}
+// ToDo: Review to take this out
+function startIt(){
+    alert("CLICK READY TO GO");
+}
+$(document).ready(function() {
+
+    //alert("Document Loaded");
+    // JS AJAX CODE HERE TO GET ALL THE TASKS
+    let id=document.getElementById("taskArea");
+    let URL = `http://127.0.0.1:3000/lostAndFound/lostItems`;
 
 
+    //ToDo: This is how to input a table in HTML dynamically
+    //ToDo: Take Note
 
+    $.ajax({
+        url: URL,
+        headers: {'Access-Control-Allow-Origin':'*'}, // <-------- set this
+        contentType: 'application/json',
+        async: true,
+        crossDomain : true,
+        success : function( data ){
+            let oStr = "<h2>View Lost Items</h2>";
+            oStr += "<table border='1'> ";
+            oStr += `<tr><th>Id</th><th>Officer Name</th><th>Item Type</th><th>Item Info</th><th>Item Value</th><th>Location</th><th>Date Found</th><th>Time Found</th><th>Actions</th></tr>`;
+            //alert("success");
+            console.log(`data:`);
+            console.log( data );
+            for (let i=0; i<data.length; i++){
+                let ti = data[i].itemID;
+                let of = data[i].officerName;
+                let it = data[i].itemType;
+                let iDesc = data[i].itemDesc;
+                let iv = data[i].itemVal;
+                let l = data[i].location;
+                let df = data[i].dateFound;
+                let tf = data[i].timeFound;
+                oStr += `<tr><td>${ti}</td><td>${of}</td><td>${it}</td><td>${iDesc}</td><td>${"$"+ iv}</td><td>${l}</td><td>${df}</td><td>${tf}</td>`;
+                oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
+                oStr += `</tr>`;
 
+            }
+            oStr += `</table>`;
+            id.innerHTML = oStr;
+        },
+        error : function( xhr, status, error ) {
+            alert(URL)
+            alert("Error");
+        }
 
-    </div>
-    <div id="TableContainer">
-        <div id="studentHeader">
-            <h1>AU Lost And Found</h1>
-        </div>
-        <div id="filterSortArea">
-            <div class="dropdown">
-                <button class="dropbtn">Filter By:</button>
-                <div class="dropdown-content">
-                    <a href="#">Officer: Joe</a>
-                    <a href="#">Officer: Jennifer</a>
-                </div>
-            </div>
-            &nbsp;&nbsp;&nbsp;
-            <div class="dropdown">
-                <button class="dropbtn">Sort By:</button>
-                <div class="dropdown-content">
-                    <a href="#">Item ID: Low to High</a>
-                    <a href="#">Item ID: High to Low</a>
-                    <a href="#">Date Found: Ascending Order</a>
-                    <a href="#">Date Found: Descending Order</a>
-                </div>
-            </div>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </div>
-        <div id="taskArea">
-            <!-- This is where the table is generated  -->
-        </div>
-    </div>
-</body>
-</html>
+    })
+    console.log(`URL:${URL}`);
+});
