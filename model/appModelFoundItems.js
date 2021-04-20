@@ -18,7 +18,7 @@ var Item2 = function (item2) {
     this.studentDriversLicense = item2.studentDriversLicense;
 };
 Item2.createItem = function (newItem2, result) {
-    sql.query("INSERT INTO FoundItems set ?", newItem2, function (err, res) {
+    sql.query("INSERT INTO FoundItemsTable set ?", newItem2, function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -29,7 +29,7 @@ Item2.createItem = function (newItem2, result) {
     });
 };
 Item2.getItemByID = function (itemID, result) {
-    sql.query("Select studentFName, studentLName, AUID, studentPhoneNum, dateRecovered, timeRecovered from FoundItems where itemID = ? ", itemID, function (err, res) {
+    sql.query("Select studentFName, studentLName, AUID, studentPhoneNum, dateRecovered, timeRecovered from FoundItemsTable where itemID = ? ", itemID, function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -39,7 +39,7 @@ Item2.getItemByID = function (itemID, result) {
     });
 };
 Item2.getAllItem = function (result) {
-    sql.query("Select * from FoundItems", function (err, res) {
+    sql.query("Select * from FoundItemsTable", function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -50,7 +50,7 @@ Item2.getAllItem = function (result) {
     });
 };
 Item2.updateByID = function (itemID, FoundItem, result) {
-    sql.query("UPDATE FoundItems SET FoundItem = ? WHERE itemID = ?", [FoundItem.item, itemID], function (err, res) {
+    sql.query("UPDATE FoundItemsTable SET FoundItem = ? WHERE itemID = ?", [FoundItem.item, itemID], function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -60,7 +60,7 @@ Item2.updateByID = function (itemID, FoundItem, result) {
     });
 };
 Item2.remove = function (itemID, result) {
-    sql.query("DELETE FROM FoundItems WHERE itemID = ?", [itemID], function (err, res) {
+    sql.query("DELETE FROM FoundItemsTable WHERE itemID = ?", [itemID], function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(null, err);
