@@ -111,7 +111,7 @@ $(document).ready(function() {
                 let df = data[i].dateFound;
                 let tf = data[i].timeFound;
                 oStr += `<tr><td>${ti}</td><td>${of}</td><td>${it}</td><td>${iDesc}</td><td>${"$"+ iv}</td><td>${l}</td><td>${df}</td><td>${tf}</td>`;
-                oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button>  <button type="button" class="btn btn-primary" onClick="updateIt(${ti}, '${of}', '${it}', '${iv}', '${l}', '${df}', '${tf}' )">Update ${ti} </button></td>`;
+                oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
                 oStr += `</tr>`;
 
             }
