@@ -29,7 +29,7 @@ Item2.createItem = function (newItem2, result) {
     });
 };
 Item2.getItemByID = function (itemID, result) {
-    sql.query("Select studentFName, studentLName, AUID, studentPhoneNum, dateRecovered, timeRecovered from FoundItemsTable where itemID = ? ", itemID, function (err, res) {
+    sql.query("Select officerName, itemType, itemDesc, itemVal, location, dateFound, timeFound, studentFName, studentLName, AUID, studentPhoneNum, dateRecovered, timeRecovered from FoundItemsTable where itemID = ? ", itemID, function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -50,7 +50,10 @@ Item2.getAllItem = function (result) {
     });
 };
 Item2.updateByID = function (itemID, FoundItem, result) {
-    sql.query("UPDATE FoundItemsTable SET FoundItem = ? WHERE itemID = ?", [FoundItem.item, itemID], function (err, res) {
+    sql.query("UPDATE FoundItemsTable SET officerName = ?, itemType = ?, itemDesc = ?, itemVal = ?, location = ?, dateFound = ?, timeFound = ?, " +
+        "studentFName = ?, studentLName = ?, AUID = ?, studentPhoneNum = ?, dateRecovered = ?, timeRecovered = ? WHERE itemID = ?",
+        [FoundItem.officerName, FoundItem.itemType,FoundItem.itemDesc, FoundItem.itemVal, FoundItem.location, FoundItem.dateFound,
+            FoundItem.timeFound, FoundItem.studentFName, FoundItem.studentLName, FoundItem.AUID, FoundItem.studentPhoneNum, FoundItem.dateRecovered, FoundItem.timeRecovered,itemID], function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(null, err);

@@ -43,7 +43,7 @@ Item.getAllItem = function (result) {
     });
 };
 Item.updateByID = function (itemID, LostItem, result) {
-    sql.query("UPDATE LostItems SET LostItems = ? WHERE itemID = ?", [LostItem.item, itemID], function (err, res) {
+    sql.query("UPDATE LostItems SET officerName = ? WHERE itemID = ?", [LostItem.officerName, itemID], function (err, res) {
         if (err) {
             console.log("error: ", err);
             result(null, err);

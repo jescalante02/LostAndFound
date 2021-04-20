@@ -32,7 +32,7 @@ exports.read_a_foundItem = function (req, res) {
     });
 };
 exports.update_a_foundItem = function (req, res) {
-    Item2.updateByID(req.params.itemID, new Item(req.body), function (err, item2) {
+    Item2.updateByID(req.params.itemID, new Item2(req.body), function (err, item2) {
         if (err) res.send(err);
         res.json(item2);
     });
