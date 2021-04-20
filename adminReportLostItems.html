@@ -1,234 +1,79 @@
-$(document).ready(function (){
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AU - Lost And Found</title>
+    <link rel="stylesheet" href="css/stylesheet.css" />
+    <!--
+    https://visme.co/blog/website-color-schemes/
+    23 - Blue and Refreshing Color Scheme
+    -->
 
-    class lostItem {
-        #officerFound
-        #dateFound
-        #itemType
-        #itemDesc
-        #timeFound
-        #building
-        #buildingFloor
-        #buildingDesc
-        #itemValue
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous">
 
-        constructor(officerFound, dateFound, itemType, itemDesc, timeFound, building, buildingFloor, buildingDesc, itemValue) {
-            this.#officerFound = officerFound;
-            this.#dateFound = dateFound;
-            this.#itemType = itemType;
-            this.#itemDesc = itemDesc;
-            this.#timeFound = timeFound;
-            this.#building = building;
-            this.#buildingFloor = buildingFloor;
-            this.#buildingDesc = buildingDesc;
-            this.#itemValue = itemValue;
-        }
+    </script>
+    <script src="js/adminReportLostItems.js"></script>
+</head>
+<body>
+    <div id="navigation">
+        <h2>What are you<br />looking to do?</h2>
+        <br />
+        <div class="dropdown">
+            <button class="dropbtn">Select One:</button>
+            <div class="dropdown-content">
+                <a href="adminReportLostItems.html">Report Lost</a>
+                <a href="adminReportFoundItems.html">Report Found</a>
+                <a href="adminViewLostItems.html">View Lost</a>
+                <a href="adminViewFoundItems.html">View Found</a>
+            </div>
+        </div>
 
 
-        get officerFound() {
-            return this.#officerFound;
-        }
 
-        set officerFound(value) {
-            this.#officerFound = value;
-        }
 
-        get dateFound() {
-            return this.#dateFound;
-        }
 
-        set dateFound(value) {
-            this.#dateFound = value;
-        }
+    </div>
+    <div id="TableContainer">
+        <div id="studentHeader">
+            <h1>AU Lost And Found</h1>
+            <br /><h3>Report Lost Item</h3>
+        </div>
+        <div>
+                <!-- First row of the form -->
+                <label>Officer Found:</label>&nbsp;<input type="text" id="officerFound" name="officerFound" required />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label>Date Found:</label>&nbsp;<input type="date" id="dateFound" name="dateFound" required />
+                <!-- Second row of the form -->
+                <br /><br /><label>Item Type:</label>&nbsp;<input type="radio" id="School Supplies" name="itemType" value="School Supplies" required checked ><label for="School Supplies">School Supplies</label>
+                &nbsp;<input type="radio" id="Electronics" name="itemType" value="Electronics"><label for="Electronics">Electronics</label>
+                &nbsp;<input type="radio" id="Clothing" name="itemType" value="Clothing"><label for="Clothing">Clothing</label>
+                &nbsp;<input type="radio" id="Accessories" name="itemType" value="Accessories"><label for="Accessories">Accessories</label>
+                &nbsp;<input type="radio" id="Miscellaneous" name="itemType" value="Miscellaneous" ><label for="Miscellaneous">Miscellaneous</label>
 
-        get itemType() {
-            return this.#itemType;
-        }
-
-        set itemType(value) {
-            this.#itemType = value;
-        }
-
-        get itemDesc() {
-            return this.#itemDesc;
-        }
-
-        set itemDesc(value) {
-            this.#itemDesc = value;
-        }
-
-        get timeFound() {
-            return this.#timeFound;
-        }
-
-        set timeFound(value) {
-            this.#timeFound = value;
-        }
-
-        get building() {
-            return this.#building;
-        }
-
-        set building(value) {
-            this.#building = value;
-        }
-
-        get buildingFloor() {
-            return this.#buildingFloor;
-        }
-
-        set buildingFloor(value) {
-            this.#buildingFloor = value;
-        }
-
-        get buildingDesc() {
-            return this.#buildingDesc;
-        }
-
-        set buildingDesc(value) {
-            this.#buildingDesc = value;
-        }
-
-        get itemValue() {
-            return this.#itemValue;
-        }
-
-        set itemValue(value) {
-            this.#itemValue = value;
-        }
-    }
-
-    $('#submitBtn').click(function (){
-        //Initialize lostItem object
-        let item = new lostItem('','','','','','','','',0)
-        let testBuffer = ''; //This variable will play a part at testing whether the response from the user input is valid
-        let numOfErrors = 0; //This variable represents the num of errors, and if any, will not proceed to post the item onto the database
-        numOfErrors += getAndTestOfficerFound(testBuffer, item)
-        numOfErrors += getAndTestDateFound(testBuffer, item)
-        numOfErrors += getAndTestItemType(testBuffer, item);
-        numOfErrors += getAndTestItemDesc(testBuffer, item);
-        numOfErrors += getAndTestTimeFound(testBuffer, item)
-        numOfErrors += getAndTestBuilding(testBuffer, item);
-        numOfErrors += getAndTestBuildingFloor(testBuffer, item);
-        numOfErrors += getAndTestBuildingDesc(testBuffer, item);
-        numOfErrors += getAndTestItemValue(testBuffer, item)
-
-        if (numOfErrors == 0){
-            insertLostItem(item)
-        }
-    })
-
-    function getAndTestOfficerFound(buffer, item){
-        buffer = document.getElementById("officerFound").value;
-        if(buffer === ''){
-            alert("Please enter the name of the officer who found the item.")
-            return 1;
-        }
-        item.officerFound = buffer;
-        return 0;
-    }
-
-    function getAndTestDateFound(buffer, item){
-        buffer = document.getElementById("dateFound").value;
-        if(buffer === ''){
-            alert("Please enter the date that the item was found.")
-            return 1;
-        }
-        item.dateFound = buffer;
-        return 0;
-    }
-
-    function getAndTestItemType(buffer, item){
-        buffer = document.querySelector('input[name="itemType"]:checked').value;
-        item.itemType = buffer; //Since a radio button is already checked, there's no need to check for garbage
-        return 0;
-    }
-
-    function getAndTestItemDesc(buffer, item){
-        buffer = document.getElementById("itemDesc").value;
-        if(buffer === ''){
-            alert("Please enter the description of the item that was found.")
-            return 1;
-        }
-        item.itemDesc = buffer;
-        return 0;
-    }
-
-    function getAndTestTimeFound(buffer, item){
-        buffer = document.getElementById("timeFound").value;
-        if(buffer === ''){
-            alert("Please enter the time found of the item that was found.")
-            return 1;
-        }
-        item.timeFound = buffer;
-        return 0;
-    }
-
-    function getAndTestBuilding(buffer, item){
-        buffer = document.querySelector('input[name="Building"]:checked').value;
-        item.building = buffer; //Since a radio button is already checked, there's no need to check for garbage
-        return 0;
-    }
-
-    function getAndTestBuildingFloor(buffer, item){
-        buffer = document.getElementById("floor").value
-        if(buffer === ''){
-            alert("Please enter the building floor that the item was found.")
-            return 1;
-        }
-        item.buildingFloor = buffer;
-        return 0
-    }
-
-    function getAndTestBuildingDesc(buffer, item){
-        buffer = document.getElementById("buildingDesc").value
-        if(buffer === ''){
-            alert("Please enter the building description.")
-            return 1;
-        }
-        item.buildingDesc = buffer;
-        return 0;
-    }
-
-    function getAndTestItemValue(buffer, item){
-        buffer = document.getElementById("itemValue").value;
-        if(buffer === ''){
-            alert("Please enter the item value.")
-            return 1;
-        }
-        item.itemValue = buffer;
-        return 0;
-    }
-
-    function insertLostItem(item) {
-        let totalLocation = item.building + ', ' + "Floor: " +item.buildingFloor + ', ' + item.buildingDesc;
-        let URL = "http://127.0.0.1:3000/lostAndFound/lostItems"
-        let d = {
-            officerName : `${item.officerFound}`,
-            itemType : `${item.itemType}`,
-            itemDesc : `${item.itemDesc}`,
-            itemVal : `${item.itemValue}`,
-            location : `${totalLocation}`,
-            dateFound : `${item.dateFound}`,
-            timeFound : `${item.timeFound}`
-        };
-        $.ajax({
-            url : URL,
-            contentType : 'application/json',
-            type: 'POST',
-            data : JSON.stringify( d ),
-            success : function( data ) {
-                //let oStr = "<h2> Success </h2>" ;
-                console.log(`Success`)
-                console.log( data );
-                alert("Item has been reported.")
-                window.location.reload();
-            },
-            error : function( xhr, status, error ) {
-                alert( "Error");
-                console.log(`AJAX ERROR`)
-                console.log( error );
-            }
-        })
-    }
-
-})
+                <!-- Third row of the form -->
+                <br /><br /><label>Item Description:</label>&nbsp;<input type="text" id="itemDesc" name="itemDesc" required />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label>Time Found:</label>&nbsp;<input type="time" id="timeFound" name="timeFound" required />
+                <!-- Fourth row of the form -->
+                <br /><br /><label>Building:</label>&nbsp;<input type="radio" id="DunhamSchool" name="Building" value="Dunham School" required checked ><label for="DunhamSchool">Dunham School</label>
+                &nbsp;<input type="radio" id="SchoolofArts" name="Building" value="School of Arts"><label for="SchoolofArts">School of Arts</label>
+                &nbsp;<input type="radio" id="SchoolofEducation" name="Building" value="School of Education"><label for="SchoolofEducation">School of Education</label>
+                &nbsp;<input type="radio" id="SchoolofHealthScience" name="Building" value="School of Health Science"><label for="SchoolofHealthScience">School of Health Science</label>
+                <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" id="SchoolofNursing" name="Building" value="School of Nursing"><label for="SchoolofNursing">School of Nursing</label>
+                &nbsp;<input type="radio" id="SchoolofSocialWork" name="Building" value="School of Social Work"><label for="SchoolofSocialWork">School of Social Work</label>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Building Floor:</label>&nbsp;<input required type="text" id="floor" name="floor" style="width: 25px" />
+                <!-- Fifth row of the form -->
+                <br/><br /><label>Building Description:</label>&nbsp;<input type="text" id="buildingDesc" name="buildingDesc" style="width: 200px" required />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Est Item Value:</label>
+                &nbsp;<input type="text" id="itemValue" name="itemValue" style="width: 80px" required />
+                <!-- Sixth row of the form -->
+            <br /><br /><button id="submitBtn">Submit</button>
+        </div>
+    </div>
+</body>
+</html>
