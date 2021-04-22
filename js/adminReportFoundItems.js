@@ -25,8 +25,10 @@
         #studentPhoneNum
         #studentDriversLicense
 
+        #goThroughBool
 
-        constructor(officerFound, dateFound, itemType, itemDesc, timeFound, building, buildingFloor, buildingDesc, itemValue, location, itemID, dateRecovered, AUID, timeRecovered, studentFName, studentLName, studentPhoneNum, studentDriversLicense) {
+
+        constructor(officerFound, dateFound, itemType, itemDesc, timeFound, building, buildingFloor, buildingDesc, itemValue, location, itemID, dateRecovered, AUID, timeRecovered, studentFName, studentLName, studentPhoneNum, studentDriversLicense, goThroughBool) {
             this.#officerFound = officerFound;
             this.#dateFound = dateFound;
             this.#itemType = itemType;
@@ -45,6 +47,7 @@
             this.#studentLName = studentLName;
             this.#studentPhoneNum = studentPhoneNum;
             this.#studentDriversLicense = studentDriversLicense;
+            this.#goThroughBool = goThroughBool;
         }
 
         get officerFound() {
@@ -191,6 +194,14 @@
         set location(value) {
             this.#location = value;
         }
+
+        get goThroughBool() {
+            return this.#goThroughBool;
+        }
+
+        set goThroughBool(value) {
+            this.#goThroughBool = value;
+        }
     }
 
     let dataLostItems; //Variable that saves the JSON from the lostItems DB
@@ -217,7 +228,7 @@
     function submitBtn() {
         //Initialize lostItem object
         let item = new foundItem('', '', '', '', '', '', '', '', 0,
-            0, 0, 0, 0, '', '', 0, '', 1, '')
+            '', 0, 0, 0, '', '', '', '', '', false)
         let testBuffer = ''; //This variable will play a part at testing whether the response from the user input is valid
         let numOfErrors = 0; //This variable represents the num of errors, and if any, will not proceed to post the item onto the database
         numOfErrors += getAndTestItemID(testBuffer, item)
@@ -374,10 +385,12 @@
                 console.log(`Success`)
                 console.log(data);
                 alert("Item has been reported.")
-                window.location.reload();
+                item.goThroughBool = true
+                //window.location.reload();
             },
             error: function (xhr, status, error) {
                 alert("Error");
+                item.goThroughBool = false
                 console.log(`AJAX ERROR`)
                 console.log(error);
             }
@@ -402,6 +415,7 @@
                 window.location.reload();
             }
         })
+
 
     }
 
