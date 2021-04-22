@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AU - Lost And Found</title>
+    <link rel="stylesheet" href="css/stylesheet.css" />
+    <!--
+    https://visme.co/blog/website-color-schemes/
+    23 - Blue and Refreshing Color Scheme
+    -->
+
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous">
+
+    </script>
+    <script src="js/adminReportLostItems.js"></script>
+</head>
+<body>
+    <div id="navigation">
+        <h2>What are you<br />looking to do?</h2>
+        <br />
+        <div class="dropdown">
+            <button class="dropbtn">Select One:</button>
+            <div class="dropdown-content">
+                <a href="adminReportLostItems.html">Report Lost</a>
+                <a href="adminReportFoundItems.html">Report Found</a>
+                <a href="adminViewLostItems.html">View Lost</a>
+                <a href="adminViewFoundItems.html">View Found</a>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+    <div id="TableContainer">
+        <div id="studentHeader">
+            <h1>AU Lost And Found</h1>
+            <br /><h3>Report Lost Item</h3>
+        </div>
+        <div>
+                <!-- First row of the form -->
+                <label>Officer Found:</label>&nbsp;<input type="text" id="officerFound" name="officerFound" required />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label>Date Found:</label>&nbsp;<input type="date" id="dateFound" name="dateFound" required />
+                <!-- Second row of the form -->
+                <br /><br /><label>Item Type:</label>&nbsp;<input type="radio" id="School Supplies" name="itemType" value="School Supplies" required checked ><label for="School Supplies">School Supplies</label>
+                &nbsp;<input type="radio" id="Electronics" name="itemType" value="Electronics"><label for="Electronics">Electronics</label>
+                &nbsp;<input type="radio" id="Clothing" name="itemType" value="Clothing"><label for="Clothing">Clothing</label>
+                &nbsp;<input type="radio" id="Accessories" name="itemType" value="Accessories"><label for="Accessories">Accessories</label>
+                &nbsp;<input type="radio" id="Miscellaneous" name="itemType" value="Miscellaneous" ><label for="Miscellaneous">Miscellaneous</label>
+
+                <!-- Third row of the form -->
+                <br /><br /><label>Item Description:</label>&nbsp;<input type="text" id="itemDesc" name="itemDesc" required />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label>Time Found:</label>&nbsp;<input type="time" id="timeFound" name="timeFound" required />
+                <!-- Fourth row of the form -->
+                <br /><br /><label>Building:</label>&nbsp;<input type="radio" id="DunhamSchool" name="Building" value="Dunham School" required checked ><label for="DunhamSchool">Dunham School</label>
+                &nbsp;<input type="radio" id="SchoolofArts" name="Building" value="School of Arts"><label for="SchoolofArts">School of Arts</label>
+                &nbsp;<input type="radio" id="SchoolofEducation" name="Building" value="School of Education"><label for="SchoolofEducation">School of Education</label>
+                &nbsp;<input type="radio" id="SchoolofHealthScience" name="Building" value="School of Health Science"><label for="SchoolofHealthScience">School of Health Science</label>
+                <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" id="SchoolofNursing" name="Building" value="School of Nursing"><label for="SchoolofNursing">School of Nursing</label>
+                &nbsp;<input type="radio" id="SchoolofSocialWork" name="Building" value="School of Social Work"><label for="SchoolofSocialWork">School of Social Work</label>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Building Floor:</label>&nbsp;<input required type="text" id="floor" name="floor" style="width: 25px" />
+                <!-- Fifth row of the form -->
+                <br/><br /><label>Building Description:</label>&nbsp;<input type="text" id="buildingDesc" name="buildingDesc" style="width: 200px" required />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Est Item Value:</label>
+                &nbsp;<input type="text" id="itemValue" name="itemValue" style="width: 80px" required />
+                <!-- Sixth row of the form -->
+            <br /><br /><button onclick="submitBtn()">Submit</button>
+        </div>
+    </div>
+</body>
+</html>

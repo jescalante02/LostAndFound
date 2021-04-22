@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AU - Lost And Found</title>
+    <link rel="stylesheet" href="css/stylesheet.css" />
+    <!--
+    https://visme.co/blog/website-color-schemes/
+    23 - Blue and Refreshing Color Scheme
+    -->
+
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous">
+
+    </script>
+    <script src="js/adminReportFoundItems.js"></script>
+</head>
+<body>
+    <div id="navigation">
+        <h2>What are you<br />looking to do?</h2>
+        <br />
+        <div class="dropdown">
+            <button class="dropbtn">Select One:</button>
+            <div class="dropdown-content">
+                <a href="adminReportLostItems.html">Report Lost</a>
+                <a href="adminReportFoundItems.html">Report Found</a>
+                <a href="adminViewLostItems.html">View Lost</a>
+                <a href="adminViewFoundItems.html">View Found</a>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+    <div id="TableContainer">
+        <div id="studentHeader">
+            <h1>AU Lost And Found</h1>
+            <br /><h3>Report Found Item</h3>
+        </div>
+        <div>
+                <!-- First row of the form -->
+                <label>Item ID:</label>&nbsp;<input type="text" id="itemID" name="itemID" required />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label>Date Recovered:</label>&nbsp;<input type="date" id="dateRecovered" name="dateRecovered" required />
+                <!-- Second row of the form -->
+                <br /><br /><label>AUID:</label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="AUID" name="AUID" required />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label>Time Recovered:</label>&nbsp;<input type="time" id="timeRecovered" name="timeRecovered" required />
+                <!-- Third row of the form -->
+                <br /><br /><label>Student First Name:</label>&nbsp;<input type="text" id="studentFName" name="studentFName" required />
+                &nbsp;&nbsp;&nbsp;&nbsp;<label>Student Last Name:</label>&nbsp;<input type="text" id="studentLName" name="studentLName" required /><br /><br />
+                <label>Student PTN:</label>&nbsp;<input type="text" id="studentPhoneNum" name="studentPhoneNum" required />
+                &nbsp;&nbsp;&nbsp;&nbsp;<label>Student Driver's License:</label>&nbsp;<input type="text" id="studentDriversLicense" name="studentDriversLicense" required />
+                <!-- Fourth row of the form -->
+
+                <!-- Fifth row of the form -->
+            <br /><br /><button onclick="submitBtn()">Submit</button>
+        </div>
+    </div>
+</body>
+</html>
