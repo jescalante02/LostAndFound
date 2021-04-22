@@ -1,5 +1,3 @@
-$(document).ready(function () {
-
 
     let lostURL = "http://127.0.0.1:3000/lostAndFound/lostItems"
     let foundURL = "http://127.0.0.1:3000/lostAndFound/foundItems"
@@ -216,7 +214,7 @@ $(document).ready(function () {
     })
 
     //Activates when user presses the submit button
-    $('#submitBtn').click(function () {
+    function submitBtn() {
         //Initialize lostItem object
         let item = new foundItem('', '', '', '', '', '', '', '', 0,
             0, 0, 0, 0, '', '', 0, '', 1, '')
@@ -244,7 +242,7 @@ $(document).ready(function () {
         }
 
 
-    })
+    }
 
     function getAndTestItemID(buffer, item) {
         buffer = document.getElementById("itemID").value;
@@ -389,7 +387,6 @@ $(document).ready(function () {
     function deleteIt(item) {
         // Todo: Need to error check the ID
         let URL = `http://127.0.0.1:3000/lostAndFound/lostItems/${item.itemID}`;
-        alert(`URL:${URL}`)
         $.ajax({
             url: URL,
             contentType: 'application/json',
@@ -407,5 +404,5 @@ $(document).ready(function () {
         })
 
     }
-})
+
 
