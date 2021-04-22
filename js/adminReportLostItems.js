@@ -1,4 +1,4 @@
-$(document).ready(function (){
+'use strict'
 
     class lostItem {
         #officerFound
@@ -97,7 +97,7 @@ $(document).ready(function (){
         }
     }
 
-    $('#submitBtn').click(function (){
+    function submitBtn() {
         //Initialize lostItem object
         let item = new lostItem('','','','','','','','',0)
         let testBuffer = ''; //This variable will play a part at testing whether the response from the user input is valid
@@ -115,7 +115,7 @@ $(document).ready(function (){
         if (numOfErrors == 0){
             insertLostItem(item)
         }
-    })
+    }
 
     function getAndTestOfficerFound(buffer, item){
         buffer = document.getElementById("officerFound").value;
@@ -200,13 +200,14 @@ $(document).ready(function (){
     }
 
     function insertLostItem(item) {
+        let totalLocation = item.building + ', ' + "Floor: " +item.buildingFloor + ', ' + item.buildingDesc;
         let URL = "http://127.0.0.1:3000/lostAndFound/lostItems"
         let d = {
             officerName : `${item.officerFound}`,
             itemType : `${item.itemType}`,
             itemDesc : `${item.itemDesc}`,
             itemVal : `${item.itemValue}`,
-            location : `${item.building}`,
+            location : `${totalLocation}`,
             dateFound : `${item.dateFound}`,
             timeFound : `${item.timeFound}`
         };
@@ -219,6 +220,8 @@ $(document).ready(function (){
                 //let oStr = "<h2> Success </h2>" ;
                 console.log(`Success`)
                 console.log( data );
+                alert("Item has been reported.")
+                window.location.reload();
             },
             error : function( xhr, status, error ) {
                 alert( "Error");
@@ -227,5 +230,3 @@ $(document).ready(function (){
             }
         })
     }
-
-})
